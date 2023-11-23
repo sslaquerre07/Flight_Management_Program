@@ -106,3 +106,6 @@ class airline{
         //Possibly more functions as necessary
 
 };
+
+//Function prototypes of additional functions
+void print_title();
