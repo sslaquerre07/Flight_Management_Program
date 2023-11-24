@@ -5,7 +5,6 @@
 #include "header.h"
 using namespace std;
 
-
 //Seat Implementation
 seat::seat(){
     rowM = 0;
@@ -72,4 +71,3 @@ passenger::~passenger(){
     seat_numberM = nullptr;
     passengerid = 0;
 }
-
