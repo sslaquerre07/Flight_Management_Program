@@ -10,47 +10,49 @@ typedef vector<vector<bool>> seatmap;
 class seat{
     public:
         //All constructors/destructors
-        seat(int rowM, int colM, bool status);
+        seat();
+        seat(int row, int col, bool status);
         seat(const seat& src);
-        seat& operator=(const seat& src);
+        seat& operator=(const seat& rhs);
         ~seat();
         //Getters and setters
         const int getrow()const {return rowM;}
         const int getcol()const {return colM;}
-        const bool getstatus()const {return status;}
+        const bool getstatus()const {return statusM;}
         void set_row(const int new_row) {rowM = new_row;}
         void set_col(const int new_col) {colM = new_col;}
-        void change_status(const bool new_status) {status = new_status;}
+        void change_status(const bool new_status) {statusM = new_status;}
         //More functions as needed.
 
     private:
         int rowM, colM;
-        bool status;
+        bool statusM;
 };
 
 // Declaration of passenger class
 class passenger{
     public:
         //All constructors/destructors
-        passenger(int id, string fname, string lname, seat* number);
+        passenger();
+        passenger(int id, string fname, string lname, string phone, int row, int column);
         passenger(const passenger& src);
         passenger& operator=(const passenger& rhs);
         ~passenger();
         //Getters and setters
         const int get_id()const {return passengerid;}
-        const string get_fname()const {return fname;}
-        const string get_lname()const {return lname;}
-        const string get_phone()const {return phone;}
-        const seat* get_seat()const {return seat_number;}
+        const string get_fname()const {return fnameM;}
+        const string get_lname()const {return lnameM;}
+        const string get_phone()const {return phoneM;}
+        const seat* get_seat()const {return seat_numberM;}
         void set_id(const int new_id) {passengerid = new_id;}
-        void set_name(const string* name) {fname = name[0], lname = name[1];}
-        void set_num(const string number) {phone = number;}
+        void set_name(const string* name) {fnameM = name[0], lnameM = name[1];}
+        void set_num(const string number) {phoneM = number;}
         //More functions as needed.
 
     private:
         int passengerid;
-        string fname, lname, phone;
-        seat* seat_number;
+        string fnameM, lnameM, phoneM;
+        seat* seat_numberM;
 };
 
 // Declaration of flight class
