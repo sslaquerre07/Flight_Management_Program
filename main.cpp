@@ -11,7 +11,7 @@ void print_title();
 void menu_display();
 void space_remover(ifstream& in_stream);
 void read_header(ifstream& in_stream, string& flightid, string& rows, string& cols);
-passenger read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id);
+passenger create_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id);
 
 int main(){
     //Print the title screen
@@ -26,15 +26,14 @@ int main(){
 
     //Declaration of variables used for creating new objects
     string flight_id, rows, cols, fname, lname, phone, seat, pass_id;
-    int passenger_index = 0;
-    //vector<passenger> passenger_list; Added when class implemenation done.
+    vector<passenger> passenger_list(8);
     
 
     //Reading the file and created associated objects from the file
     read_header(data_input, flight_id, rows, cols);
-    #if 0
+    #if 1
     while(!data_input.eof()){
-        //passenger_list.at(passenger_index) = read_passenger()
+        passenger_list.push_back(create_passenger(data_input, fname, lname, phone, seat, pass_id));
     }
     #endif
 
@@ -93,7 +92,7 @@ void menu_display(){
 //Acts as a buffer for the file
 void space_remover(ifstream& in_stream){
     char ch = in_stream.peek();
-    while(ch == ' ' || ch == '\n'){
+    while(ch == ' ' || ch == '\n' || ch == EOF){
         char consume = in_stream.get();
         ch = in_stream.peek();
     }
@@ -110,7 +109,35 @@ void read_header(ifstream& in_stream, string& flightid, string& rows, string& co
     space_remover(in_stream);
 }
 
-// Gets all passenger information from the file
-passenger read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id){
 
+
+// Gets all passenger information from the file
+passenger create_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id){
+    getline(in_stream, fname, ' ');
+    space_remover(in_stream);
+    getline(in_stream, lname, ' ');
+    space_remover(in_stream);
+    getline(in_stream, phone, ' ');
+    space_remover(in_stream);
+    //Some special consideration taken for the seat
+    getline(in_stream, seat, ' ');
+    int row, col;
+    if(seat.at(1) >= '0' && seat.at(1) <= '9'){
+        string rowS = seat.substr(0,2);
+        char colS = seat.at(2);
+        row = stoi(rowS);
+        col = colS -'A';
+    }
+    else{
+        char rowS = seat.at(0);
+        char colS = seat.at(1);
+        int row = rowS -'0';
+        int col = colS - 'A';
+    }
+    space_remover(in_stream);
+    getline(in_stream, id, ' ');
+    //More consideration for id
+    int idI = stoi(id);
+    space_remover(in_stream);
+    passenger new_pass(idI, fname, lname, phone, row, col);
 }
