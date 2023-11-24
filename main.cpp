@@ -37,6 +37,7 @@ int main(){
         int idI = stoi(pass_id);
         int rowI, colI;
         int seat_size = seat.length();
+        //Accounts for different seat formatting, up to double digit rows
         if(seat_size > 2){
             rowI = stoi(seat.substr(0,2));
             colI = seat.at(2)-'A';
