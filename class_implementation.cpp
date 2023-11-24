@@ -43,6 +43,8 @@ seat::~seat(){
 //Passenger Implementation
 passenger::passenger(){
     seat_numberM = nullptr;
+    passengerid = 0;
+    fnameM = "", lnameM = "", phoneM = "";
 }
 
 passenger::passenger(int id, string fname, string lname, string phone, int row, int column){
@@ -70,4 +72,5 @@ passenger& passenger::operator=(const passenger& rhs){
 passenger::~passenger(){
     seat_numberM = nullptr;
     passengerid = 0;
+    fnameM = "", lnameM = "", phoneM = "";
 }
