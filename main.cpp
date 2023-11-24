@@ -82,6 +82,7 @@ int main(){
             //Additional checks still required in this member function on other file
             new_pass.add_info(id_check);
             passenger_list.push_back(new_pass);
+            delete [] id_info;
         }
         else if(option == 4){
             //Remove data function
@@ -96,6 +97,7 @@ int main(){
             }
             passenger_list.erase(passenger_list.begin()+id_info[1]);
             cout << "Passenger Successfully Erased" << endl;
+            delete [] id_info;
         }
         else if(option == 5){
             //Save Data Function
