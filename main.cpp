@@ -107,7 +107,7 @@ void read_header(ifstream& in_stream, string& flightid, string& rows, string& co
     space_remover(in_stream);
     getline(in_stream, rows, ' ');
     space_remover(in_stream);
-    getline(in_stream, cols, ' ');
+    getline(in_stream, cols, '\n');
     space_remover(in_stream);
 }
 
