@@ -26,18 +26,27 @@ int main(){
 
     //Declaration of variables used for creating new objects
     string flight_id, rows, cols, fname, lname, phone, seat, pass_id;
-    int passenger_index = 0;
     vector<passenger> passenger_list;
-    
 
     //Reading the file and created associated objects from the file
     read_header(data_input, flight_id, rows, cols);
-    #if 1
+    //Initialization of flight should go here
     while(!data_input.eof()){
         read_passenger(data_input, fname, lname, phone, seat, pass_id);
-        break;
+        //Manipulate the data to fit the parameters
+        int idI = stoi(pass_id);
+        int rowI, colI;
+        int seat_size = seat.length();
+        if(seat_size > 2){
+            rowI = stoi(seat.substr(0,2));
+            colI = seat.at(2)-'A';
+        }
+        else{
+            rowI = seat.at(0)-'0';
+            colI = seat.at(1)-'A';
+        }
+        passenger_list.push_back(passenger(idI, fname, lname, phone, rowI, colI));
     }
-    #endif
 
 
     //Read the option selection from the user and perform the function accordingly
@@ -113,5 +122,14 @@ void read_header(ifstream& in_stream, string& flightid, string& rows, string& co
 
 // Gets all passenger information from the file
 void read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id){
-
+    getline(in_stream, fname, ' ');
+    space_remover(in_stream);
+    getline(in_stream, lname, ' ');
+    space_remover(in_stream);
+    getline(in_stream, phone, ' ');
+    space_remover(in_stream);
+    getline(in_stream, seat, ' ');
+    space_remover(in_stream);
+    getline(in_stream, id, '\n');
+    space_remover(in_stream);
 }
