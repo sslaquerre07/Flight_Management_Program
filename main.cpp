@@ -54,6 +54,7 @@ int main(){
     int option = 0;
     while(1){
         menu_display();
+        cout << "What task would you like to perform today?: ";
         cin >> option;
         //Check if the option is a valid integer here.
         if(option == 1){
@@ -64,6 +65,26 @@ int main(){
         }
         else if(option == 3){
             //Add Passenger Function
+            cout << endl;
+            int id_check;
+            int id_bool = 0;
+            cout << "Please enter passenger id" << endl;
+            cin >> id_check;
+            //Checks if the id already exists.
+            for(int i = 0; i<passenger_list.size();i++){
+                if(passenger_list.at(i).get_id() == id_check){
+                    cout << "Passenger already exists, cannot be added" << endl;
+                    id_bool = 1;
+                    break;
+                }  
+            }
+            if(id_bool == 1)
+                continue;
+            passenger new_pass;
+            //Additional checks still required in this member function on other file
+            new_pass.add_info(id_check);
+            passenger_list.push_back(new_pass);
+            cout << new_pass.get_fname() << endl;
         }
         else if(option == 4){
             //Remove data function
@@ -85,6 +106,7 @@ int main(){
 
 //All general function implementations here
 void print_title(){
+    cout << endl;
     cout << "Version: 1.0" << endl;
     cout << "Term Project - Flight Management Program in C++" << endl;
     cout << "Produced By: Sam Laquerre, Amielle El Makhzoumi" << endl;
@@ -92,6 +114,7 @@ void print_title(){
 }
 
 void menu_display(){
+    cout << endl;
     cout << "Please select one of the following options:" << endl;
     cout << "1. Display Flight Seat Map" << endl;
     cout << "2. Display Passenger Information" << endl;

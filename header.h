@@ -48,6 +48,7 @@ class passenger{
         void set_name(const string* name) {fnameM = name[0], lnameM = name[1];}
         void set_num(const string number) {phoneM = number;}
         //More functions as needed.
+        void add_info(int& id);
 
     private:
         int passengerid;

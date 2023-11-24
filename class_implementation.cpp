@@ -74,3 +74,24 @@ passenger::~passenger(){
     passengerid = 0;
     fnameM = "", lnameM = "", phoneM = "";
 }
+
+void passenger::add_info(int& id){
+    string row, col;
+    passengerid = id;
+    cout << "Please enter the passenger first name: ";
+    cin >> fnameM;
+    cout << "Please enter the passenger last name: ";
+    cin >> lnameM;
+    cout << "Please enter the passenger phone number with the following format(xxx-xxx-xxxx): ";
+    cin >> phoneM;
+    cout << endl;
+    //Possibly have to consider a valid seat #??
+    cout << "Enter the passenger's desired row: ";
+    cin >> row;
+    cout << "Enter the passenger's desired seat: ";
+    cin >> col;
+    int colI = col.at(0) - 'A';
+    seat_numberM = new seat(stoi(row), colI, true);
+    return;    
+    
+}
