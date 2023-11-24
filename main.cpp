@@ -3,15 +3,43 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <assert.h>
 #include "header.h"
 using namespace std;
 
 void print_title();
 void menu_display();
+void space_remover(ifstream& in_stream);
+void read_header(ifstream& in_stream, string& flightid, string& rows, string& cols);
+passenger read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id);
 
 int main(){
+    //Print the title screen
     print_title();
-    //Read text file provided with info and assign accordingly
+
+    //Open and check the file connection
+    ifstream data_input("input.txt");
+    if(data_input.fail()){
+        cout << "file failed to open";
+        return 0;
+    }
+
+    //Declaration of variables used for creating new objects
+    string flight_id, rows, cols, fname, lname, phone, seat, pass_id;
+    int passenger_index = 0;
+    //vector<passenger> passenger_list; Added when class implemenation done.
+    
+
+    //Reading the file and created associated objects from the file
+    read_header(data_input, flight_id, rows, cols);
+    #if 0
+    while(!data_input.eof()){
+        //passenger_list.at(passenger_index) = read_passenger()
+    }
+    #endif
+
+
+    //Read the option selection from the user and perform the function accordingly
     int option = 0;
     while(1){
         menu_display();
@@ -60,4 +88,29 @@ void menu_display(){
     cout << "4. Remove an Existing Passenger" << endl;
     cout << "5. Save data" << endl;
     cout << "6. Quit" << endl;
+}
+
+//Acts as a buffer for the file
+void space_remover(ifstream& in_stream){
+    char ch = in_stream.peek();
+    while(ch == ' ' || ch == '\n'){
+        char consume = in_stream.get();
+        ch = in_stream.peek();
+    }
+    return;
+}
+
+//Reads the top line of the file
+void read_header(ifstream& in_stream, string& flightid, string& rows, string& cols){
+    getline(in_stream, flightid, ' ');
+    space_remover(in_stream);
+    getline(in_stream, rows, ' ');
+    space_remover(in_stream);
+    getline(in_stream, cols, ' ');
+    space_remover(in_stream);
+}
+
+// Gets all passenger information from the file
+passenger read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id){
+
 }
