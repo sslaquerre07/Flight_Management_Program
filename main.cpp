@@ -16,6 +16,7 @@ void read_passenger(ifstream& in_stream, string& fname, string& lname, string& p
 int* check_passenger(vector<passenger> passenger_list, int id_check);
 //To be implemented once flight has been defined.
 void save_data(ofstream out_stream, flight flight_info, vector<passenger> passenger_list);
+int id_checker();
 
 int main(){
     //Print the title screen
@@ -63,12 +64,12 @@ int main(){
         cout << "What task would you like to perform today?: ";
         cin >> optionS;
         //Check for valid option selection
-        if(optionS.at(0) < '0' || optionS.at(0) > '9'){
+        if(isdigit(optionS.at(0)))
+            option = stoi(optionS);
+        else{
             cout << "Invalid Option, returning to the main menu ..." << endl << endl;
             continue;
         }
-        else
-            option = stoi(optionS);
         //Check if the option is a valid integer here.
         if(option == 1){
             //seat_map display function
@@ -79,9 +80,11 @@ int main(){
         else if(option == 3){
             //Add Passenger Function
             cout << endl;
-            int id_check;
-            cout << "Please enter passenger id" << endl;
-            cin >> id_check;
+            cout << "You have selected to add a new passenger" << endl;
+            //Check if it's a valid ID
+            int id_check = id_checker();
+            if(id_check == 0)
+                continue;
             //Checks if the id already exists.
             int* id_info = check_passenger(passenger_list, id_check);
             if(id_info != nullptr){
@@ -97,9 +100,12 @@ int main(){
         else if(option == 4){
             //Remove data function
             cout << endl;
-            int id_check;
-            cout << "Please enter passenger id to be removed" << endl;
-            cin >> id_check;
+            cout << "You have selected to remove a passenger" << endl;
+            //Checks if user has inputted a valid id to be processed
+            int id_check = id_checker();
+            if(id_check == 0)
+                continue;
+            //Checks if valid id is in the database. 
             int* id_info = check_passenger(passenger_list, id_check);
             if(id_info == nullptr){
                 cout << "No passenger with this ID found" << endl;
@@ -207,4 +213,29 @@ int* check_passenger(vector<passenger> passenger_list, int id_check){
         }  
     }
     return nullptr;
+}
+
+//Checks if id entered by the user is valid for use before insertion/deletion
+//RETURNS: 0 if invalid ID, converted ID otherwise.
+int id_checker(){
+    int id;
+    string id_checkS;
+    cout << "Please enter passenger id" << endl;
+    cin >> id_checkS;
+    //Check if it's a valid ID
+    int id_bool = 1;
+    if(id_checkS.size() == 5){
+        for(int i = 0; i<5;i++){
+            if(isdigit(id_checkS.at(i)))
+                continue;
+            else
+                id_bool = 0; 
+        }
+    }
+    if(id_bool == 0 || id_checkS.size() != 5){
+        cout << "Invalid ID, returning to the main menu ..." << endl << endl;
+        return 0;
+    }
+    id = stoi(id_checkS);
+    return id;
 }
