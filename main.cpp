@@ -9,7 +9,7 @@ using namespace std;
 
 void print_title();
 void menu_display();
-void space_remover(ifstream& in_stream);
+int space_remover(ifstream& in_stream);
 void read_header(ifstream& in_stream, string& flightid, string& rows, string& cols);
 void read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id);
 //Should be implemented in the flight class, but good enough for now.
@@ -22,7 +22,7 @@ int main(){
     print_title();
 
     //Open and check the file connection
-    ifstream data_input("input.txt");
+    ifstream data_input("flight_info.txt");
     if(data_input.fail()){
         cout << "file failed to open";
         return 0;
@@ -137,13 +137,17 @@ void menu_display(){
 }
 
 //Acts as a buffer for the file
-void space_remover(ifstream& in_stream){
+int space_remover(ifstream& in_stream){
+    int space_count = 0;
     char ch = in_stream.peek();
     while(ch == ' ' || ch == '\n'){
         char consume = in_stream.get();
         ch = in_stream.peek();
+        space_count++;
     }
-    return;
+    space_count++;
+    cout << space_count << endl;
+    return space_count;
 }
 
 //Reads the top line of the file
@@ -158,16 +162,32 @@ void read_header(ifstream& in_stream, string& flightid, string& rows, string& co
 
 // Gets all passenger information from the file
 void read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id){
+    int spaces;
     getline(in_stream, fname, ' ');
-    space_remover(in_stream);
+    spaces = space_remover(in_stream);
+    //Checks if a passenger has two first names
+    if(spaces == 1){
+        string add_name;
+        getline(in_stream, add_name, ' ');
+        fname+=add_name;
+        space_remover(in_stream);
+    }
     getline(in_stream, lname, ' ');
-    space_remover(in_stream);
+    spaces = space_remover(in_stream);
+    //Checks if a passenger has two last names
+    if(spaces == 1){
+        string add_name;
+        getline(in_stream, add_name, ' ');
+        lname+=add_name;
+        space_remover(in_stream);
+    }
     getline(in_stream, phone, ' ');
     space_remover(in_stream);
     getline(in_stream, seat, ' ');
     space_remover(in_stream);
     getline(in_stream, id, '\n');
     space_remover(in_stream);
+    cout << lname << endl;
 }
 
 //Checks if a passenger is in the passenger list
