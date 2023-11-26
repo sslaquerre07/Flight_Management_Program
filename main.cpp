@@ -13,7 +13,7 @@ int space_remover(ifstream& in_stream);
 void read_header(ifstream& in_stream, string& flightid, string& rows, string& cols);
 void read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id);
 //Should be implemented in the flight class, but good enough for now.
-int* check_passenger(vector<passenger> passenger_list, int id_check);
+int check_passenger(vector<passenger> passenger_list, int id_check);
 //To be implemented once flight has been defined.
 void save_data(ofstream out_stream, flight flight_info, vector<passenger> passenger_list);
 int id_checker();
@@ -86,8 +86,8 @@ int main(){
             if(id_check == 0)
                 continue;
             //Checks if the id already exists.
-            int* id_info = check_passenger(passenger_list, id_check);
-            if(id_info != nullptr){
+            int id_info = check_passenger(passenger_list, id_check);
+            if(id_info != 0){
                 cout << "Passenger already exists, please try again";
                 continue;
             }
@@ -95,7 +95,6 @@ int main(){
             //Additional checks still required in this member function on other file
             new_pass.add_info(id_check);
             passenger_list.push_back(new_pass);
-            delete [] id_info;
         }
         else if(option == 4){
             //Remove data function
@@ -106,14 +105,16 @@ int main(){
             if(id_check == 0)
                 continue;
             //Checks if valid id is in the database. 
-            int* id_info = check_passenger(passenger_list, id_check);
-            if(id_info == nullptr){
+            int id_info = check_passenger(passenger_list, id_check);
+            if(id_info == 0){
                 cout << "No passenger with this ID found" << endl;
                 continue;
             }
-            passenger_list.erase(passenger_list.begin()+id_info[1]);
+            passenger_list.erase(passenger_list.begin()+id_info);
             cout << "Passenger Successfully Erased" << endl;
-            delete [] id_info;
+            for(int i = 0; i<passenger_list.size(); i++){
+                cout << passenger_list.at(i).get_fname();
+            }
         }
         else if(option == 5){
             //Save Data Function
@@ -203,16 +204,14 @@ void read_passenger(ifstream& in_stream, string& fname, string& lname, string& p
 }
 
 //Checks if a passenger is in the passenger list
-int* check_passenger(vector<passenger> passenger_list, int id_check){
+int check_passenger(vector<passenger> passenger_list, int id_check){
     for(int i = 0; i<passenger_list.size();i++){
-        if(passenger_list.at(i).get_id() == id_check){
-            int* return_list = new int[2];
-            return_list[0] = 1;
-            return_list[1] = i;
-            return return_list;
+        int id = passenger_list.at(i).get_id();
+        if(id == id_check){
+            return i;
         }  
     }
-    return nullptr;
+    return 0;
 }
 
 //Checks if id entered by the user is valid for use before insertion/deletion
