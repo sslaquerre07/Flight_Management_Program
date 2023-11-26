@@ -112,9 +112,6 @@ int main(){
             }
             passenger_list.erase(passenger_list.begin()+id_info);
             cout << "Passenger Successfully Erased" << endl;
-            for(int i = 0; i<passenger_list.size(); i++){
-                cout << passenger_list.at(i).get_fname() << endl;
-            }
         }
         else if(option == 5){
             //Save Data Function
