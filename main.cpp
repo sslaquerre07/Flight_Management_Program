@@ -56,11 +56,19 @@ int main(){
 
 
     //Read the option selection from the user and perform the function accordingly
-    int option = 0;
+    string optionS;
     while(1){
+        int option;
         menu_display();
         cout << "What task would you like to perform today?: ";
-        cin >> option;
+        cin >> optionS;
+        //Check for valid option selection
+        if(optionS.at(0) < '0' || optionS.at(0) > '9'){
+            cout << "Invalid Option, returning to the main menu ..." << endl << endl;
+            continue;
+        }
+        else
+            option = stoi(optionS);
         //Check if the option is a valid integer here.
         if(option == 1){
             //seat_map display function
@@ -146,7 +154,6 @@ int space_remover(ifstream& in_stream){
         space_count++;
     }
     space_count++;
-    cout << space_count << endl;
     return space_count;
 }
 
@@ -187,7 +194,6 @@ void read_passenger(ifstream& in_stream, string& fname, string& lname, string& p
     space_remover(in_stream);
     getline(in_stream, id, '\n');
     space_remover(in_stream);
-    cout << lname << endl;
 }
 
 //Checks if a passenger is in the passenger list
