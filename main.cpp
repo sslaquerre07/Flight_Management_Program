@@ -13,7 +13,7 @@ int space_remover(ifstream& in_stream);
 void read_header(ifstream& in_stream, string& flightid, string& rows, string& cols);
 void read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id);
 //Should be implemented in the flight class, but good enough for now.
-int check_passenger(vector<passenger> passenger_list, int id_check);
+int check_passenger(vector<passenger>& passenger_list, int& id_check);
 //To be implemented once flight has been defined.
 void save_data(ofstream out_stream, flight flight_info, vector<passenger> passenger_list);
 int id_checker();
@@ -87,7 +87,7 @@ int main(){
                 continue;
             //Checks if the id already exists.
             int id_info = check_passenger(passenger_list, id_check);
-            if(id_info != 0){
+            if(id_info != -1){
                 cout << "Passenger already exists, please try again";
                 continue;
             }
@@ -106,14 +106,14 @@ int main(){
                 continue;
             //Checks if valid id is in the database. 
             int id_info = check_passenger(passenger_list, id_check);
-            if(id_info == 0){
+            if(id_info == -1){
                 cout << "No passenger with this ID found" << endl;
                 continue;
             }
             passenger_list.erase(passenger_list.begin()+id_info);
             cout << "Passenger Successfully Erased" << endl;
             for(int i = 0; i<passenger_list.size(); i++){
-                cout << passenger_list.at(i).get_fname();
+                cout << passenger_list.at(i).get_fname() << endl;
             }
         }
         else if(option == 5){
@@ -204,14 +204,14 @@ void read_passenger(ifstream& in_stream, string& fname, string& lname, string& p
 }
 
 //Checks if a passenger is in the passenger list
-int check_passenger(vector<passenger> passenger_list, int id_check){
+int check_passenger(vector<passenger>& passenger_list, int& id_check){
     for(int i = 0; i<passenger_list.size();i++){
         int id = passenger_list.at(i).get_id();
         if(id == id_check){
             return i;
         }  
     }
-    return 0;
+    return -1;
 }
 
 //Checks if id entered by the user is valid for use before insertion/deletion
