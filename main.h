@@ -18,8 +18,8 @@ void read_header(ifstream& in_stream, string& flightid, string& rows, string& co
 void read_passenger(ifstream& in_stream, string& fname, string& lname, string& phone, string& seat, string& id);
 //Should be implemented in the flight class, but good enough for now.
 int check_passenger(vector<passenger>& passenger_list, int& id_check);
-//To be implemented once flight has been defined.
-void save_data(ofstream out_stream, flight flight_info, vector<passenger> passenger_list);
 int id_checker();
+//To be fully implemented once flight has been defined.
+void data_save(ofstream& out_stream, vector<passenger>& passenger_list, string& flightid, string& row, string& col);
 
 #endif

@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <iomanip>
 #include "main.h"
 using namespace std;
 
@@ -103,6 +104,9 @@ int main(){
         }
         else if(option == 5){
             //Save Data Function
+            ofstream output("flight_info.txt");
+            data_save(output, passenger_list, flight_id, rows, cols);
+            output.close();
         }
         else if(option == 6){
             cout << "Goodbye";
@@ -222,4 +226,23 @@ int id_checker(){
     }
     id = stoi(id_checkS);
     return id;
+}
+
+void data_save(ofstream& out_stream, vector<passenger>& passenger_list, string& flightid, string& row, string& col){
+    out_stream << left << setw(9) << flightid << left << setw(6) << row << left << setw(2) << col << '\n';
+    int list_size = passenger_list.size();
+    for(int i = 0; i<list_size;i++){
+        out_stream << left << setw(20) << passenger_list.at(i).get_fname();
+        out_stream << left << setw(20) << passenger_list.at(i).get_lname();
+        out_stream << left << setw(20) << passenger_list.at(i).get_phone();
+        seat* pass_seat = passenger_list.at(i).get_seat();
+        int row = pass_seat->getrow();
+        char colC = pass_seat->getcol() + 'A';
+        string rowS = to_string(row);
+        string colS(1, colC);
+        string seatM = rowS+colS;
+        out_stream << left << setw(4) << seatM;
+        out_stream << left << setw(5) << passenger_list.at(i).get_id() << '\n';
+    }
+    cout << "Data Successfully Saved. Returning to Main Page\n";
 }
