@@ -21,11 +21,11 @@ class flight{
         flight& operator=(const flight& src);
         ~flight();
         //Getters and setters
-        const string get_ID()const {return flightID;}
-        const int getrowsM()const {return rowsM;}
-        const int getcolsM()const {return colsM;}
-        const vector<passenger> get_list()const {return passenger_list;}
-        const seatmap get_map()const {return map;}
+        string get_ID()const {return flightID;}
+        int getrowsM()const {return rowsM;}
+        int getcolsM()const {return colsM;}
+        vector<passenger> get_list()const {return passenger_list;}
+        seatmap get_map()const {return map;}
         void set_ID(const string new_ID) {flightID = new_ID;}
         void setrowsM(const int rows) {rowsM = rows;}
         void setcolsM(const int cols) {colsM = cols;}

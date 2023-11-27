@@ -19,11 +19,11 @@ class passenger{
         passenger& operator=(const passenger& rhs);
         ~passenger();
         //Getters and setters
-        const int get_id()const {return passengerid;}
-        const string get_fname()const {return fnameM;}
-        const string get_lname()const {return lnameM;}
-        const string get_phone()const {return phoneM;}
-        const seat* get_seat()const {return seat_numberM;}
+        int get_id()const {return passengerid;}
+        string get_fname()const {return fnameM;}
+        string get_lname()const {return lnameM;}
+        string get_phone()const {return phoneM;}
+        seat* get_seat()const {return seat_numberM;}
         void set_id(const int new_id) {passengerid = new_id;}
         void set_name(const string* name) {fnameM = name[0], lnameM = name[1];}
         void set_num(const string number) {phoneM = number;}

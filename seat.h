@@ -16,9 +16,9 @@ class seat{
         seat& operator=(const seat& rhs);
         ~seat();
         //Getters and setters
-        const int getrow()const {return rowM;}
-        const int getcol()const {return colM;}
-        const bool getstatus()const {return statusM;}
+        int getrow()const {return rowM;}
+        int getcol()const {return colM;}
+        bool getstatus()const {return statusM;}
         void set_row(const int new_row) {rowM = new_row;}
         void set_col(const int new_col) {colM = new_col;}
         void change_status(const bool new_status) {statusM = new_status;}
