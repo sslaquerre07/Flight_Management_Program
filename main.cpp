@@ -4,7 +4,10 @@
 #include <vector>
 #include <string>
 #include <assert.h>
-#include "header.h"
+#include "airline.h"
+#include "flight.h"
+#include "passenger.h"
+#include "seat.h"
 using namespace std;
 
 void print_title();
