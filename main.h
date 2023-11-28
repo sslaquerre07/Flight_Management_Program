@@ -21,5 +21,7 @@ int check_passenger(vector<passenger>& passenger_list, int& id_check);
 int id_checker();
 //To be fully implemented once flight has been defined.
 void data_save(ofstream& out_stream, vector<passenger>& passenger_list, string& flightid, string& row, string& col);
+//Should also be implemented in the flight class, but will work for now
+void display_info(vector<passenger> passenger_list);
 
 #endif

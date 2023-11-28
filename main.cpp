@@ -65,6 +65,7 @@ int main(){
         }
         else if(option == 2){
             //Display Passenger Function
+            display_info(passenger_list);
         }
         else if(option == 3){
             //Add Passenger Function
@@ -232,6 +233,8 @@ int id_checker(){
     return id;
 }
 
+
+//Saves data back into the file
 void data_save(ofstream& out_stream, vector<passenger>& passenger_list, string& flightid, string& row, string& col){
     out_stream << left << setw(9) << flightid << left << setw(6) << row << left << setw(2) << col << '\n';
     int list_size = passenger_list.size();
@@ -249,4 +252,17 @@ void data_save(ofstream& out_stream, vector<passenger>& passenger_list, string& 
         out_stream << left << setw(5) << passenger_list.at(i).get_id() << '\n';
     }
     cout << "Data Successfully Saved. Returning to Main Page\n";
+}
+
+//Displays passenger info in a table, will be implemented in the flight class later
+void display_info(vector<passenger> passenger_list){
+    string line(90, '-');
+    cout << left << setw(20) << "First Name";
+    cout << left << setw(20) << "Last Name";
+    cout << left << setw(20) << "Phone";
+    cout << left << setw(10) << "Row";
+    cout << left << setw(10) << "Seat";
+    cout << left << setw(10) << "ID" << endl;
+    cout << line << endl;
+    
 }
