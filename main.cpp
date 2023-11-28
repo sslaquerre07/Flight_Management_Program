@@ -82,7 +82,8 @@ int main(){
             }
             passenger new_pass;
             //Additional checks still required in this member function on other file
-            new_pass.add_info(id_check);
+            int flight_rows = stoi(rows), flight_cols = stoi(cols);
+            new_pass.add_info(id_check, flight_rows, flight_cols);
             passenger_list.push_back(new_pass);
         }
         else if(option == 4){
@@ -169,7 +170,9 @@ void read_passenger(ifstream& in_stream, string& fname, string& lname, string& p
     getline(in_stream, fname, ' ');
     spaces = space_remover(in_stream);
     //Checks if a passenger has two first names
+    string space(1, ' ');
     if(spaces == 1){
+        fname += space;
         string add_name;
         getline(in_stream, add_name, ' ');
         fname+=add_name;
@@ -179,6 +182,7 @@ void read_passenger(ifstream& in_stream, string& fname, string& lname, string& p
     spaces = space_remover(in_stream);
     //Checks if a passenger has two last names
     if(spaces == 1){
+        lname += space;
         string add_name;
         getline(in_stream, add_name, ' ');
         lname+=add_name;

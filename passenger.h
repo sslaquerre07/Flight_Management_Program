@@ -29,7 +29,7 @@ class passenger{
         void set_num(const string number) {phoneM = number;}
         //More functions as needed.
         void read_passenger(ifstream& in_stream, passenger& new_pass);
-        void add_info(int& id);
+        void add_info(int& id, int& rows, int& cols);
 
     private:
         int passengerid;
