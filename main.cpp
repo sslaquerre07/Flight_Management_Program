@@ -257,6 +257,7 @@ void data_save(ofstream& out_stream, vector<passenger>& passenger_list, string& 
 //Displays passenger info in a table, will be implemented in the flight class later
 void display_info(vector<passenger> passenger_list){
     string line(90, '-');
+    cout << "Passenger Information:" << endl << endl;
     cout << left << setw(20) << "First Name";
     cout << left << setw(20) << "Last Name";
     cout << left << setw(20) << "Phone";
@@ -264,5 +265,15 @@ void display_info(vector<passenger> passenger_list){
     cout << left << setw(10) << "Seat";
     cout << left << setw(10) << "ID" << endl;
     cout << line << endl;
-    
+    for(int i=0;i<passenger_list.size();i++){
+        cout << left << setw(20) << passenger_list.at(i).get_fname();
+        cout << left << setw(20) << passenger_list.at(i).get_lname();
+        cout << left << setw(20) << passenger_list.at(i).get_phone();
+        int row = passenger_list.at(i).get_seat()->getrow(), col = passenger_list.at(i).get_seat()->getcol();
+        char colC = col + 'A';
+        cout << left << setw(10) << row;
+        cout << left << setw(10) << colC;
+        cout << left << setw(10) << passenger_list.at(i).get_id() << endl;
+        cout << line << endl;
+    }
 }
