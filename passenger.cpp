@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #include "passenger.h"
-#include "seat.h"
 using namespace std;
 
 //Passenger Implementation

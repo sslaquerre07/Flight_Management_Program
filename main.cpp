@@ -20,12 +20,11 @@ int main(){
 
     //Declaration of variables used for creating new objects
     string flight_id, rows, cols, fname, lname, phone, seat, pass_id;
-    //Modified to class member function once flight defined.
-    vector<passenger> passenger_list;
 
     //Reading the file and created associated objects from the file
     read_header(data_input, flight_id, rows, cols);
     //Initialization of flight should go here
+    flight f0(flight_id, stoi(rows), stoi(cols));
     while(!data_input.eof()){
         read_passenger(data_input, fname, lname, phone, seat, pass_id);
         //Manipulate the data to fit the parameters
@@ -41,8 +40,9 @@ int main(){
             rowI = seat.at(0)-'0';
             colI = seat.at(1)-'A';
         }
-        passenger_list.push_back(passenger(idI, fname, lname, phone, rowI, colI));
+        f0.add_passenger(passenger(idI, fname, lname, phone, rowI, colI));
     }
+
 
 
     //Read the option selection from the user and perform the function accordingly
@@ -65,7 +65,7 @@ int main(){
         }
         else if(option == 2){
             //Display Passenger Function
-            display_info(passenger_list);
+            display_info(f0.get_list());
         }
         else if(option == 3){
             //Add Passenger Function
@@ -76,7 +76,7 @@ int main(){
             if(id_check == 0)
                 continue;
             //Checks if the id already exists.
-            int id_info = check_passenger(passenger_list, id_check);
+            int id_info = f0.check_passenger(id_check);
             if(id_info != -1){
                 cout << "Passenger already exists, please try again";
                 continue;
@@ -85,7 +85,7 @@ int main(){
             //Additional checks still required in this member function on other file
             int flight_rows = stoi(rows), flight_cols = stoi(cols);
             new_pass.add_info(id_check, flight_rows, flight_cols);
-            passenger_list.push_back(new_pass);
+            f0.add_passenger(new_pass);
         }
         else if(option == 4){
             //Remove data function
@@ -96,18 +96,19 @@ int main(){
             if(id_check == 0)
                 continue;
             //Checks if valid id is in the database. 
-            int id_info = check_passenger(passenger_list, id_check);
+            int id_info = f0.check_passenger(id_check);
             if(id_info == -1){
                 cout << "No passenger with this ID found" << endl;
                 continue;
             }
-            passenger_list.erase(passenger_list.begin()+id_info);
+            f0.remove_passenger(id_info);
             cout << "Passenger Successfully Erased" << endl;
         }
         else if(option == 5){
             //Save Data Function
             ofstream output("flight_info.txt");
-            data_save(output, passenger_list, flight_id, rows, cols);
+            vector<passenger> list_copy = f0.get_list();
+            data_save(output, list_copy, flight_id, rows, cols);
             output.close();
         }
         else if(option == 6){
@@ -195,17 +196,6 @@ void read_passenger(ifstream& in_stream, string& fname, string& lname, string& p
     space_remover(in_stream);
     getline(in_stream, id, '\n');
     space_remover(in_stream);
-}
-
-//Checks if a passenger is in the passenger list
-int check_passenger(vector<passenger>& passenger_list, int& id_check){
-    for(int i = 0; i<passenger_list.size();i++){
-        int id = passenger_list.at(i).get_id();
-        if(id == id_check){
-            return i;
-        }  
-    }
-    return -1;
 }
 
 //Checks if id entered by the user is valid for use before insertion/deletion
