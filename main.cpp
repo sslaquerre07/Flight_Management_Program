@@ -40,9 +40,9 @@ int main(){
             rowI = seat.at(0)-'0';
             colI = seat.at(1)-'A';
         }
-        f0.add_passenger(passenger(idI, fname, lname, phone, rowI, colI));
+        passenger new_pass(idI, fname, lname, phone, rowI, colI);
+        f0.add_passenger(new_pass);
     }
-
 
 
     //Read the option selection from the user and perform the function accordingly

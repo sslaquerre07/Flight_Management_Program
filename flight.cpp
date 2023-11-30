@@ -76,10 +76,13 @@ flight::~flight(){
 
 void flight::add_passenger(const passenger& pass){
     passenger_listM.push_back(pass);
+    map.at(pass.get_seat()->getrow()).at(pass.get_seat()->getcol())->change_status(true);
     return;
 }
 
 void flight::remove_passenger(int pos){
+    passenger tb_removed = passenger_listM.at(pos);
+    map.at(tb_removed.get_seat()->getrow()).at(tb_removed.get_seat()->getcol())->change_status(false);
     passenger_listM.erase(passenger_listM.begin()+pos);
 }
 
