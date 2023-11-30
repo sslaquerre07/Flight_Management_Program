@@ -23,5 +23,7 @@ int id_checker();
 void data_save(ofstream& out_stream, vector<passenger>& passenger_list, string& flightid, string& row, string& col);
 //Should also be implemented in the flight class, but will work for now
 void display_info(vector<passenger> passenger_list);
+void printGrid(const vector<vector<char>>& grid);
+void display_seatmap(const seatmap map);
 
 #endif

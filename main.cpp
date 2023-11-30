@@ -62,6 +62,7 @@ int main(){
         //Check if the option is a valid integer here.
         if(option == 1){
             //seat_map display function
+            display_seatmap(f0.get_map());
         }
         else if(option == 2){
             //Display Passenger Function
@@ -266,4 +267,38 @@ void display_info(vector<passenger> passenger_list){
         cout << left << setw(10) << passenger_list.at(i).get_id() << endl;
         cout << line << endl;
     }
+}
+
+void printGrid(const vector<vector<char>>& grid) {
+    for (const auto& row : grid) {
+        for (char cell : row) {
+            cout << "+---";
+        }
+        cout << "+" << endl;
+
+        for (char cell : row) {
+            cout << "| " << cell << " ";
+        }
+        cout << "|" << endl;
+    }
+
+    for (char cell : grid[0]) {
+        cout << "+---";
+    }
+    cout << "+" << endl;
+}
+
+void display_seatmap(const seatmap map){
+
+    vector<vector<char>> grid(map.size(), vector<char>(map[0].size(), ' '));
+
+    for (size_t i = 0; i < map.size(); ++i) {
+        for (size_t j = 0; j < map[i].size(); ++j) {
+            if (map[i][j]->getstatus() == true) {
+                grid[i-1][j] = 'X';
+            }
+        }
+    }
+
+    printGrid(grid);
 }
