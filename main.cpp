@@ -85,8 +85,22 @@ int main(){
             passenger new_pass;
             //Additional checks still required in this member function on other file
             int flight_rows = stoi(rows), flight_cols = stoi(cols);
-            new_pass.add_info(id_check, flight_rows, flight_cols);
-            f0.add_passenger(new_pass);
+            while(1){
+                new_pass.add_info(id_check, flight_rows, flight_cols);
+                int check = 1;
+                for(int i = 0;i<f0.get_list().size();i++){
+                    if(new_pass.get_seat()->getrow() == f0.get_list().at(i).get_seat()->getrow() && new_pass.get_seat()->getcol() == f0.get_list().at(i).get_seat()->getcol()){
+                        check = 0;
+                        break;
+                    }
+                }
+                if(check == 0){
+                    cout << "Passenger with this seat already exists, please try again" << endl;
+                    continue;
+                }
+                f0.add_passenger(new_pass);
+                break;
+            }
         }
         else if(option == 4){
             //Remove data function
