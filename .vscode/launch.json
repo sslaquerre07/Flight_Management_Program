@@ -11,7 +11,7 @@
       "cwd": "c:/Users/sslaq/OneDrive/Documents/GitHub/ENSF_337_FinalProject",
       "program": "c:/Users/sslaq/OneDrive/Documents/GitHub/ENSF_337_FinalProject/build/Debug/outDebug",
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "miDebuggerPath": "c:/msys64/mingw64/bin/gdb.exe",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
