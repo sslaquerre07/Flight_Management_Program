@@ -284,19 +284,35 @@ void display_info(vector<passenger> passenger_list){
 }
 
 void printGrid(const vector<vector<char>>& grid) {
+    int rowLabelWidth = to_string(grid.size()).size() + 1;
+    int columnLabelWidth = 3; // Width for each column label
+
+    // Print column labels (alphabetical)
+    cout << setw(rowLabelWidth) << " ";
+    for (char c = 'A'; c < 'A' + grid[0].size(); ++c) {
+        cout << setw(columnLabelWidth) << c << " ";
+    }
+    cout << endl;
+
+    int rowNum = 1;
     for (const auto& row : grid) {
+        int halfSpaces = (rowLabelWidth - to_string(rowNum).size()) / 2;
+        cout << string(halfSpaces, ' '); // Center row number
+        cout << setw(rowLabelWidth - halfSpaces) << rowNum++ << " "; // Print row label
         for (char cell : row) {
             cout << "+---";
         }
         cout << "+" << endl;
 
+        cout << setw(rowLabelWidth) << " ";
         for (char cell : row) {
             cout << "| " << cell << " ";
         }
         cout << "|" << endl;
     }
 
-    for (char cell : grid[0]) {
+    cout << setw(rowLabelWidth) << " ";
+    for (size_t i = 0; i < grid[0].size(); ++i) {
         cout << "+---";
     }
     cout << "+" << endl;
@@ -313,6 +329,7 @@ void display_seatmap(const seatmap map){
             }
         }
     }
-
+    
+    cout << "\tAircraft Seat Map" << endl;
     printGrid(grid);
 }
