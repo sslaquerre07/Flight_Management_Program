@@ -80,7 +80,6 @@ void passenger::add_info(int& id, int& rows, int& cols){
         cout << "Invalid number entered, please try again" << endl;
     }
     cout << endl;
-    //Possibly have to consider a valid seat #??
     while(1){
         int check = 1;
         cout << "Enter the passenger's desired row: ";

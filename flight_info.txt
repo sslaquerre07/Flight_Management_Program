@@ -5,8 +5,6 @@ Jim                 Li                  403-003-0000        19C 10002
 Kim                 Harris              403-100-0001        6D  10003
 Bill                Moore DAVIS         403-020-0020        15B 10004
 Martine Olivier     Van Paris           403-100-3000        16E 10006
-Ashley Maria        Cruz-Milette        403-803-2037        8A  10007
-Samuel Steven       Laquerre            403-466-0914        8B  10008
 Millaine            Li                  587-664-8804        16A 10009
 Arryan              Despande            587-717-4074        16B 10010
 Cody                Diao                403-587-1001        17A 10011
@@ -15,3 +13,5 @@ Gaby                Laquerre            403-829-2232        1A  10014
 Luigi               Brother             403-898-0000        7D  10005
 Bob                 Smith               403-888-0000        5A  10015
 Lip                 Gallagher           132-488-9238        1B  10018
+Samuel Steven       Laquerre            403-466-0914        8B  10007
+Ashley Maria        Cruz-Milette        403-803-2037        8A  10008
