@@ -14,7 +14,7 @@ using namespace std;
 class airline{
     public:
         //All constructors/destructors
-        airline(string name, vector<flight> flights, int total_num = 0);
+        airline(string name, vector<flight> flights, int total_num);
         airline(const airline& src);
         airline& operator=(const airline& rhs);
         ~airline();
